@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tailwindui</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= render "shared/navbar" %>
+
+    <div class="bg-slate-300 flex">
+      <%= render "shared/sidebar" %>
+
+      <main class="bg-slate-600 w-4/6 p-4 flex-grow">
+        <%= yield %>
+        <% (1..100).each do |i| %>
+          <p>Item <%= i %></p>
+        <% end %>
+      </main>
+
+      <%= render "shared/right_sidebar" %>
+    </div>
+
+  </body>
+</html>
