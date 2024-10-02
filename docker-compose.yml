@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && ./bin/rails s -p 3000 -b 0.0.0.0"      
+    ports:
+      - 3010:3000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=myapp_development
+      - POSTGRES_HOST=db
+    tty: true
+    stdin_open: true
+  css:
+    build: .
+    command: bin/rails tailwindcss:watch
+    tty: true
+    volumes:
+      - .:/rails          
+  db:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=myapp_development
+volumes:
+  postgres_data:
