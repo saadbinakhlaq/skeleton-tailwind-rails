@@ -16,9 +16,13 @@
     <%= render "shared/navbar" %>
 
     <div class="flex">
-      <main class="w-3/5 p-4 flex-grow">
+      <%= render "shared/sidebar" %>
+
+      <main class="w-4/6 p-4 flex-grow">
         <%= yield %>
       </main>
+
+      <%= render "shared/right_sidebar" %>
     </div>
 
   </body>
